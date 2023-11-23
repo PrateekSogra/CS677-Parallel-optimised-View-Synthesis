@@ -3,7 +3,7 @@
 ##Setup for our code
 
 1. Create a conda environment using our environment.yml file.
-   '''bash
+   '''python
    conda env create --name envname --file=environments.yml 
 
    conda activate envname 
