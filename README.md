@@ -3,25 +3,25 @@
 ##Setup for our code
 
 1. Create a conda environment using our environment.yml file.
-   '''python
+   ```
    conda env create --name envname --file=environments.yml 
 
    conda activate envname 
-   '''
+   ```
 2. Create viewpoints using make_data.py
-  '''
+   ```
    python3 make_data.py
-   '''
+   ```
 
 4. Run the MPI code surf-view-syn for surface rendering for NUM_PROCESSES processes
-   '''
+   ```
     mpiexec -n NUM_PROCESSES pvbatch surf-view-syn.py
-   '''
+   ```
    
    Run the code vol-view-syn for volume rendering for NUM_PROCESSES processes
-   '''
+   ```
     mpiexec -n NUM_PROCESSES pvbatch vol-view-syn.py
-   '''
+   ```
 
 6. The time taken for surface rendering optimization is stored in results1.csv and volume rendering optimization is stored in results2.csv.
    
