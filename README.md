@@ -8,9 +8,9 @@
 
    conda activate envname 
    ```
-2. Create viewpoints using make_data.py
+2. Create viewpoints using make_data.py with N_VIEWS viewpoints
    ```
-   python3 make_data.py
+   python3 make_data.py N_VIEWS
    ```
 
 4. Run the MPI code surf_optim for surface rendering for NUM_PROCESSES processes
