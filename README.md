@@ -28,4 +28,5 @@
    
 7. This cam be analysed by opttime.
    
-8. Similarity results can be reproduced using similaritygraphs.ipynb. datasat manually
+8. Similarity results can be reproduced using similaritygraphs.ipynb. The similarity and opttime codes are in the helper files.
+   
