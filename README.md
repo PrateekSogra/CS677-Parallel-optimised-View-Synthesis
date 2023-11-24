@@ -1,6 +1,6 @@
 # CS677-Parallel-optimised-View-Synthesis
 
-##Setup for our code
+## Setup for our code
 
 1. Create a conda environment using our environment.yml file.
    ```
