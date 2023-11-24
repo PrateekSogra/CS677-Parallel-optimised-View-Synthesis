@@ -29,7 +29,7 @@ def generate_image(viewpoint,img_ind):
 	paraview.simple._DisableFirstRenderCameraReset()
 
 	# create a new 'XML Image Data Reader'
-	more_reduced_pressure_datavti = XMLImageDataReader(registrationName='more_reduced_pressure_data.vti', FileName=['/users/misc/psogra20/Desktop/Project/Final_Code/more_reduced_pressure_data.vti'])
+	more_reduced_pressure_datavti = XMLImageDataReader(registrationName='more_reduced_pressure_data.vti', FileName=['datasets/more_reduced_pressure_data.vti'])
 	more_reduced_pressure_datavti.PointArrayStatus = ['ImageScalars']
 
 	# Properties modified on more_reduced_pressure_datavti
