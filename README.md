@@ -24,5 +24,6 @@
    ```
 
 6. The time taken for surface rendering optimization is stored in results1.csv and volume rendering optimization is stored in results2.csv.
+7. this cam be analysed by opttime
    
-7. Similarity results and optimization time vs for time-trails can be reproduced using similaritygraphs.ipynb and opttimegraphs.ipynb.
+8. Similarity results can be reproduced using similaritygraphs.ipynb. datasat manually
