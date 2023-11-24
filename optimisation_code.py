@@ -4,7 +4,6 @@ from scipy.stats import entropy
 from scipy.optimize import minimize
 import sys
 import skimage.measure
-#import paraview
 from zoopt import Dimension, Objective, Parameter, Opt
 from paraview.simple import *
 
@@ -110,19 +109,8 @@ def generate_image(viewpoint):
 	# save screenshot
 	SaveScreenshot('/users/misc/psogra20/Desktop/Project/6.png', renderView1, ImageResolution=[1538, 789])
 
-#================================================================
-
-#--------------------------------------------
-# uncomment the following to render all views
-# RenderAllViews()
-# alternatively, if you want to write images, you can use SaveScreenshot(...).
-
-
-
 #objective function
 def objfunc(viewpoint):
-	#viewpoint = solution.get_x()
-	#get image from viewpoint
 	generate_image(viewpoint)
 	print(viewpoint)
 	image_path = './6.png'
@@ -130,19 +118,7 @@ def objfunc(viewpoint):
 
 	image = Image.open(image_path)
 	image = ImageOps.grayscale(image)
-	# rgblist = Image.Image.split(image)
-	# rbglist[0].convert()
 	image_array = np.array(image)
-
-	#red_channel = image_array[:, :, 0]
-	#green_channel = image_array[:, :, 1]
-	#blue_channel = image_array[:, :, 2]
-
-	#entropy_red = entropy(red_channel.ravel())
-	#entropy_green = entropy(green_channel.ravel())
-	#entropy_blue = entropy(blue_channel.ravel())
-
-	#overall_entropy = (entropy_red + entropy_green + entropy_blue) / 3.0
 
 	overall_entropy = skimage.measure.shannon_entropy(image_array)
 	print(f'Overall entropy of the image: {overall_entropy}')
@@ -152,16 +128,11 @@ def objfunc(viewpoint):
 #optimiser
 def optim(x0):
 	bounds = [(max(-90,x0[0] -20), min(90, x0[0] + 20)), (max(-180,x0[1] -20), min(180, x0[1] + 20))]
-	#dim = Dimension(2, [[x0[0] -20, x0[0] + 20], [x0[1] -20, x0[1] + 20]], [False]*2)
-	#obj = Objective(objfunc, dim)
 	result = minimize(objfunc, x0 = x0, bounds = bounds, method= 'Nelder-Mead', options={ 'maxfev' : 200})
-	#result = Opt.min(obj, Parameter(budget=100*2))
-
 	return result.x
 
 #main
 x0 = [0,0]
-#generate_image([0,0])
 x0[0] = float(sys.argv[1])
 x0[1] = float(sys.argv[2])
 final_view = optim(x0)
