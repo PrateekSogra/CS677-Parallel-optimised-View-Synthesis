@@ -30,7 +30,7 @@ def generate_image(viewpoint,img_ind):
 	paraview.simple._DisableFirstRenderCameraReset()
 
 	# create a new 'Legacy VTK Reader'
-	example_large_it9vtk = LegacyVTKReader(registrationName='example_large_it=9.vtk', FileNames=['/users/misc/psogra20/Desktop/Project/example_large_it=9.vtk'])
+	example_large_it9vtk = LegacyVTKReader(registrationName='example_large_it=9.vtk', FileNames=['datasets/example_large_it=9.vtk'])
 
 	# get active view
 	renderView1 = GetActiveViewOrCreate('RenderView')
