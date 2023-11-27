@@ -13,11 +13,11 @@
    python3 make_data.py N_VIEWS
    ```
 
-4. Run the MPI code surf_optim for surface rendering for NUM_PROCESSES processes and N_VIEWS viewpoints (where N_VIEWS > NUM_PROCESSES and N_VIEWS <= 100 and number of rendering processes is NUM_PROCESSES - 1)
+4. Run the MPI code surf_optim for surface rendering for NUM_PROCESSES processes and N_VIEWS viewpoints (where N_VIEWS > NUM_PROCESSES and number of rendering processes is NUM_PROCESSES - 1)
    ```
     mpiexec -n NUM_PROCESSES pvbatch surf_optim.py N_VIEWS
    ```
-   Run the code vol_optim for volume rendering for NUM_PROCESSES processes and N_VIEWS viewpoints (where N_VIEWS > NUM_PROCESSES and N_VIEWS <= 100 and number of rendering processes is NUM_PROCESSES - 1)
+   Run the code vol_optim for volume rendering for NUM_PROCESSES processes and N_VIEWS viewpoints (where N_VIEWS > NUM_PROCESSES and number of rendering processes is NUM_PROCESSES - 1)
    ```
     mpiexec -n NUM_PROCESSES pvbatch vol_optim.py N_VIEWS
    ```
