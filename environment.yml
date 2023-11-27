@@ -1,4 +1,4 @@
-name: paraenv2
+name: paraenv
 channels:
   - conda-forge
 dependencies:
