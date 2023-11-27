@@ -7,7 +7,7 @@
 
    conda env create -f environment.yml
 
-   conda activate envname 
+   conda activate paraenv 
    ```
 2. Create viewpoints using make_data.py with N_VIEWS viewpoints
    ```
@@ -27,7 +27,7 @@
    
 6. The time taken for surface rendering optimization is stored in results1.csv and volume rendering optimization is stored in results2.csv. The columns in results1/2.csv represent number of processes, number of viewpoints, time taken.
    
-7. This cam be analysed by opttime.
+7. This can be analysed by opttime.
    
 8. Similarity results can be reproduced using similaritygraphs.ipynb. The similarity and opttime codes are in the helper files.
    
