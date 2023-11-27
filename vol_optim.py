@@ -7,11 +7,6 @@ import skimage.measure
 from paraview.simple import *
 from mpi4py import MPI
 import time
-import random
-import logging
-import threading
-import queue
-import time
 import os
 from csv import writer
 
@@ -22,7 +17,6 @@ comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
 size = comm.Get_size()
 
-num_threads = 2
 
 def generate_image(viewpoint,img_ind):
 
@@ -128,8 +122,10 @@ def generate_image(viewpoint,img_ind):
 	renderView1.Update()
 
 	# save screenshot
-	SaveScreenshot(f'InitImages/image_{img_ind}.png', renderView1, ImageResolution=[1538, 789])
-	SaveScreenshot(f'OptiImages/volimage_2_{img_ind}.png', renderView1, ImageResolution=[1538, 789])
+	if img_ind < 0:
+		SaveScreenshot(f'Intimages/image_{-1*img_ind}.png', renderView1, ImageResolution=[1538, 789])
+	else:# SaveScreenshot(f'InitImages/image_{img_ind}.png', renderView1, ImageResolution=[1538, 789])
+		SaveScreenshot(f'Optimages/image_{img_ind}.png', renderView1, ImageResolution=[1538, 789])
 
 
 #objective function
@@ -137,7 +133,10 @@ def objfunc(viewpoint,img_ind):
 	#get image from viewpoint
 	generate_image(viewpoint,img_ind)
 
-	image_path = 'OptiImages/volimage_2_' + str(img_ind) + '.png'
+	if img_ind < 0:
+		image_path = 'Intimages/image_' + str(-1*img_ind) + '.png'
+	else:
+		image_path = 'Optimages/image_' + str(img_ind) + '.png'
 
 
 	image = Image.open(image_path)
@@ -145,7 +144,7 @@ def objfunc(viewpoint,img_ind):
 	image_array = np.array(image)
 
 	overall_entropy = skimage.measure.shannon_entropy(image_array)
-	print(f'Overall entropy of the image: {overall_entropy} ' + str(img_ind) + " "  + str(rank))
+	#print(f'Overall entropy of the image: {overall_entropy} ' + str(img_ind) + " "  + str(rank))
 	return -1*(overall_entropy) # we minimise this
 
 
@@ -153,7 +152,7 @@ def objfunc(viewpoint,img_ind):
 def optim(x0,img_ind):
 	bounds = [(x0[0] -20,  x0[0] + 20), (x0[1] -20 , x0[1] + 20)]
 	#minimize objective function using Nelder-Mead within bounds with max iterations and change in function values
-	result = minimize(objfunc, x0 = x0, bounds = bounds, method= 'Nelder-Mead', options={ 'fatol' : 0.01, 'maxiter': 20}, args = {img_ind})
+	result = minimize(objfunc, x0 = x0, bounds = bounds, method= 'Nelder-Mead', options={ 'fatol' : 0.01, 'maxiter': 20}, args = img_ind)
 	return result.x
 
 #main
@@ -215,17 +214,14 @@ elif rank == 0:
 	print('All images saved.')
 	end = time.time()	
 	print("Time taken :", end-start)
+	#writing optimisation time results to csv
+	with open('helper/results2.csv','a') as file:
+		wobj = writer(file)
+		wobj.writerow([size,sys.argv[1],end - start])
+		file.close()
+
 	n = 1
 	while (n < size):
 		comm.send([1,img_ind], dest = n)
 		n = n + 1
 	MPI.Finalize()
-	end = time.time()	
-	print("Time taken :", end-start)
-	
-	#writing optimisarion time results to csv
-	with open('results2.csv','a') as file:
-		wobj = writer(file)
-		wobj.writerow([size,sys.argv[1],end - start,1])
-		file.close()
-

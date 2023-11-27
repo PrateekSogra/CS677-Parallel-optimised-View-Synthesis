@@ -1,0 +1,10 @@
+name: paraenv2
+channels:
+  - conda-forge
+dependencies:
+  - paraview
+  - python=3.10.12
+  - mpi4py
+  - scipy
+  - scikit-image
+prefix: /Users/aayush/anaconda3/envs/paraenv

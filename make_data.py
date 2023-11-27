@@ -11,7 +11,7 @@ def save_to_csv(filename, data):
     # Save data to a CSV file with two columns
     with open(filename, 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(['Column1', 'Column2'])  # Write header
+#        csv_writer.writerow(['Column1', 'Column2'])  # Write header
         csv_writer.writerows(data)
 
 if __name__ == "__main__":

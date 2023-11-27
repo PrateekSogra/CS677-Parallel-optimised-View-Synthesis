@@ -4,13 +4,12 @@
 
 1. Create a conda environment using our environment.yml file.
    ```
-   conda env export --no-builds > environment.yml
 
-   conda env create --name envname 
+   conda env create -f environment.yml
 
-   conda activate envname 
+   conda activate paraenv 
    ```
-2. Create viewpoints using make_data.py with N_VIEWS viewpoints
+2. Create viewpoints using make_data.py with N_VIEWS viewpoints (stored in data.csv)
    ```
    python3 make_data.py N_VIEWS
    ```
