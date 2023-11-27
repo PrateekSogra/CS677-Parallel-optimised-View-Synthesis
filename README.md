@@ -4,9 +4,8 @@
 
 1. Create a conda environment using our environment.yml file.
    ```
-   conda env export --no-builds > environment.yml
 
-   conda env create --name envname 
+   conda env create -f environment.yml
 
    conda activate envname 
    ```
